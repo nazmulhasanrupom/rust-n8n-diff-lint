@@ -1,39 +1,22 @@
-/// input : 2 workflows.json or 1 workflow.json
-/// output : It finds difference and tells us whats the difference  if it has 2 workflows
-/// output : It tells us bad things in the workflow
+/// learn serde
+
+use serde::{Serialize, Deserialize};
 
 
-use clap::{Parser, Subcommand};
 
-#[derive(Parser)]
-struct Cli {
-    #[command(subcommand)]
-    command: Command,
-}
-
-#[derive(Subcommand)]
-enum Command {
-    Diff {
-        old: String,
-        new: String,
-    },
-    Lint {
-        file: String,
-    },
+#[derive(Serialize, Deserialize, Debug)]
+struct Point {
+    id: i32,
+    name: String,
 }
 
 fn main() {
-    let cli = Cli::parse();
+    let point = Point {id: 1, name:"Nazmul".to_string()};
 
-    match cli.command {
+    let serialized = serde_json::to_string(&point).unwrap();
+    println!("Serialized {}",serialized);
 
-        Command::Diff{old, new} => {
-            println!("Comparing {} to {}", old,new);
-        }
-        Command::Lint{file} => {
-            println!("Linting {}", file);
-        }
-    }
+    let deserialized: Point = serde_json::from_str(&serialized).unwrap();
+    println!("Deserialize: {:?}",deserialized);
 
 }
-

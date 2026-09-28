@@ -1,0 +1,55 @@
+{
+  "name": "workflow_test_2",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "7060091a-27f5-4896-9e08-a7a2e0c48cb6",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Loop over input items and add a new field called 'myNewField' to the JSON of each one\nfor (const item of $input.all()) {\n  item.json.data = 1;\n}\n\nreturn $input.all();"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        208,
+        0
+      ],
+      "id": "6d31faab-3232-451f-b8cd-bb068982a646",
+      "name": "Code in JavaScript"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "01fc43a6-5784-4551-a09d-4b16d3ba2606",
+  "meta": {
+    "instanceId": "a8c9ff2a562c369465dd8b48d4e8f59e72ad989ba662ae89481352695b78231c"
+  },
+  "nodeGroups": [],
+  "id": "DS7uRGCiTXrT94bm",
+  "tags": []
+}
